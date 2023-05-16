@@ -126,7 +126,8 @@ read username
 #useradd -m $username
 # -----REMOVED-----> # useradd -m -c $fullname $username
 # -----ADDED-----> #
-useradd -m -c $username $fullname
+useradd -m $username
+sleep 3
 # <---------- #
 passwd $username
 usermod -aG wheel,audio,video,optical,storage,disk,network $username

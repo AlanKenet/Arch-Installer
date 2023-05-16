@@ -136,7 +136,7 @@ echo -e "${Cyan}Setting Up Sudo${No}"
 # -----REMOVED-----> # echo "%wheel ALL=(ALL) NOPASSWD: ALL" >> /etc/sudoers
 # -----ADDED-----> #
 #echo "%wheel ALL=(ALL:ALL) ALL" >> /etc/sudoers
-echo "%wheel ALL=(ALL) NOPASSWD: ALL" >> /etc/sudoers
+echo "%wheel ALL=(ALL:ALL) NOPASSWD: ALL" >> /etc/sudoers
 # <---------- #
 
 # Doas

@@ -1,6 +1,6 @@
 # Arch-Installer
 
-This is a modified version of the arch installation script created by luca.py for BIOS systems.
+This is a modified version of the arch installation script created by luca.py for BIOS legacy systems.
 
 All original lines that have been altered are marked as "Removed" and the changes made are marked as "Added".
 
@@ -14,7 +14,7 @@ Changes:
 * The loadkeys for the French distribution has been removed, keeping the default distribution.
 * A select timezone option has been added.
 * Formatting and mounting for a DOS partition table.
-* Change in the GRUB installation method for BIOS systems.
+* Change in the GRUB installation method for BIOS legacy systems.
 * Minor corrections to the useradd commands for user creation.
 * The wheel group privileges have been specified in the sudoers file.
 * Timezone selection has been modified.

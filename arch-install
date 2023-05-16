@@ -30,8 +30,8 @@ echo -e "${Cyan}[+]→ Do want to change the timezone? [y/n] :${No}"
 read answ
 if [[ $answ = y ]] ; then
   printf "${Cyan}[+]→ Enter the Timezone with format Zone/SubZone : ${No}"
-  read answ
-  timedatectl set-timezone $answ
+  read timezone
+  timedatectl set-timezone $timezone
 fi
 # <---------- #
 timedatectl set-ntp true

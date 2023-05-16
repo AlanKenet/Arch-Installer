@@ -1,4 +1,4 @@
-# Arch-BIOS-Installer
+# Arch-Installer
 This is an edit of the arch installation script made by luca.py for BIOS systems.
 
 All original lines that were changed have been marked as "Removed" and the changes have been marked as "Added" with respect to the original.

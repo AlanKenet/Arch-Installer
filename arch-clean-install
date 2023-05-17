@@ -41,7 +41,7 @@ echo "Mounting"
 swapon $swappart
 mount $linuxpart /mnt
 echo "Installing Base Packages"
-pacstrap /mnt base base-devel linux linux-headers linux-firmware linux-firmware-qlogic broadcom-wl bluez bluez-utils networkmanager vim neovim nano intel-ucode
+pacstrap /mnt base base-devel linux linux-headers linux-firmware linux-firmware-qlogic broadcom-wl bluez bluez-utils networkmanager vim neovim nano grub intel-ucode
 echo "Installation Done"
 sleep 2
 clear
@@ -93,8 +93,8 @@ printf "[+]→ Enter Username : "
 read username
 useradd -m $username
 sleep 2
-usermod -l $fullname $username
-sleep 2
+#usermod -l $fullname $username
+#sleep 2
 passwd $username
 usermod -aG wheel,audio,video,optical,storage,disk,network $username
 
@@ -109,7 +109,8 @@ clear
 
 # Grub Install :
 echo "Installing Grub Bootloader"
-grub-install --target=x86_64-i386-pc $drive
+grub-install --target=i386-pc $drive
+sleep 3
 grub-mkconfig -o /boot/grub/grub.cfg
 clear
 

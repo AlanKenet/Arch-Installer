@@ -1,0 +1,143 @@
+#!/bin/sh
+
+#Part1
+# Setting system :
+echo "Macking the system ready for installation"
+pacman --noconfirm -Sy archlinux-keyring
+echo "[+]→ Do want to change the timezone? [y/n] : "
+read answ
+if [[ $answ = y ]] ; then
+  printf "[+]→ Enter the Timezone with format Zone/SubZone : "
+  read timezone
+  timedatectl set-timezone $timezone
+fi
+timedatectl set-ntp true
+clear
+timedatectl
+sleep 5
+clear
+
+# Partiton :
+echo "Partitioning The Drive"
+lsblk
+printf "[+]→ Enter The Drive : "
+read drive
+cfdisk $drive
+clear
+echo "Formating Partitions"
+lsblk
+read -p "[+]→ Did you also create Swap partition? [y/n] : " answer
+if [[ $answer = y ]] ; then
+	printf "[+]→ Enter The Swap Partition : "
+	read swappart
+	mkswap $swappart
+fi
+printf "[+]→ Enter The Linux Partition : "
+read linuxpart
+mkfs.ext4 $linuxpart
+
+# Mounting :
+echo "Mounting"
+swapon $swappart
+mount $linuxpart /mnt
+echo "Installing Base Packages"
+pacstrap /mnt base base-devel linux linux-headers linux-firmware linux-firmware-qlogic broadcom-wl bluez bluez-utils networkmanager vim neovim nano intel-ucode
+echo "Installation Done"
+sleep 2
+clear
+genfstab -U /mnt >> /mnt/etc/fstab
+clear
+lsblk
+sleep 2
+
+#End1
+
+# Setting Part2 :
+sed -n '/^#Part2$/,/^#End2$/p' `basename $0` | sed 's/#Part2/# Arch install part 2/; /^#End2$/d' > /mnt/arch_install2.sh
+chmod +x /mnt/arch_install2.sh
+
+# Setting Part3 :
+#sed -n '/^#Part3$/,/^#End3$/p' `basename $0` | sed 's/#Part3/# Arch install part 3/; /^#End3$/d' > /mnt/arch_install3.sh
+#chmod +x /mnt/arch_install3.sh
+
+arch-chroot /mnt ./arch_install2.sh
+exit
+umount -R /mnt
+swapoff /dev/sda1
+reboot
+
+# --------------------------------------------------------------------------------
+
+#Part2
+# Time :
+ln -sf /usr/share/zoneinfo/$timezone /etc/localtime
+hwclock --systohc
+
+# Config :
+echo "Configure locale"
+echo "en_US.UTF-8 UTF-8" >> /etc/locale.gen
+echo "LANG=en_US.UTF-8" > /etc/locale.conf
+locale-gen
+printf "Enter Hostname : "
+read hostname
+echo $hostname > /etc/hostname
+echo "127.0.0.1       localhost" >> /etc/hosts
+echo "::1             localhost" >> /etc/hosts
+clear
+
+# Users Config :
+echo "Creating User"
+printf "[+]→ Enter Fullname : "
+read fullname
+printf "[+]→ Enter Username : "
+read username
+useradd -m $username
+sleep 2
+usermod -l $fullname $username
+sleep 2
+passwd $username
+usermod -aG wheel,audio,video,optical,storage,disk,network $username
+
+echo "[+]→ Creating root password : "
+passwd
+
+# Sudo :
+echo "Setting Up Sudo"
+echo "%wheel ALL=(ALL:ALL) NOPASSWD: ALL" >> /etc/sudoers
+sleep 2
+clear
+
+# Grub Install :
+echo "Installing Grub Bootloader"
+grub-install --target=x86_64-i386-pc $drive
+grub-mkconfig -o /boot/grub/grub.cfg
+clear
+
+# Installing System Packages :
+echo "Installing System Packages"
+
+# pacman.conf Edit :
+sed -i "s/#Color/Color/" /etc/pacman.conf
+sed -i "s/#UseSyslog/UseSyslog/" /etc/pacman.conf
+sed -i "s/#VerbosePkgLists/VerbosePkgLists/" /etc/pacman.conf
+sed -i "/\#ParallelDownloads = 5/a ILoveCandy" /etc/pacman.conf
+#sed -i "s/^#ParallelDownloads = 5$/ParallelDownloads = 5/" /etc/pacman.conf
+sed -i "/\[multilib\]/,/Include/"'s/^#//' /etc/pacman.conf
+
+pacman --noconfirm -Sy network-manager-applet dhcpcd wireless_tools wpa_supplicant intel-gpu-tools git dialog sed pactree wget
+
+# Gaming :
+echo "Installing System Graphics Driver"
+pacman --noconfirm -Sy mesa lib32-mesa vulkan-intel lib32-vulkan-intel vulkan-icd-loader lib32-vulkan-icd-loader lib32-ocl-icd intel-compute-runtime
+
+echo "Installation Done"
+sleep 2
+
+# Enabling Services :
+echo "Enabling Services"
+systemctl enable NetworkManager
+systemctl enable bluetooth
+clear
+
+echo "System Installation Done"
+#End2

@@ -53,7 +53,8 @@ sleep 2
 #End1
 
 # Setting Part2 :
-sed -n '/^#Part2$/,/^#End2$/p' `basename $0` | sed 's/#Part2/# Arch install part 2/; /^#End2$/d' > /mnt/arch_install2.sh
+echo "grubdrive = $drive" > /mnt/arch_install2.sh
+sed -n '/^#Part2$/,/^#End2$/p' `basename $0` | sed 's/#Part2/# Arch install part 2/; /^#End2$/d' >> /mnt/arch_install2.sh
 chmod +x /mnt/arch_install2.sh
 
 # Setting Part3 :
@@ -109,7 +110,7 @@ clear
 
 # Grub Install :
 echo "Installing Grub Bootloader"
-grub-install --target=i386-pc $drive
+grub-install --target=i386-pc $grubdrive
 sleep 3
 grub-mkconfig -o /boot/grub/grub.cfg
 clear

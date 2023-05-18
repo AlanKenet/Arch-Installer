@@ -53,7 +53,7 @@ sleep 2
 #End1
 
 # Setting Part2 :
-echo "grubdrive = $drive" > /mnt/arch_install2.sh
+echo "grubdrive=$drive" > /mnt/arch_install2.sh
 sed -n '/^#Part2$/,/^#End2$/p' `basename $0` | sed 's/#Part2/# Arch install part 2/; /^#End2$/d' >> /mnt/arch_install2.sh
 chmod +x /mnt/arch_install2.sh
 
@@ -123,7 +123,7 @@ sed -i "s/#Color/Color/" /etc/pacman.conf
 sed -i "s/#UseSyslog/UseSyslog/" /etc/pacman.conf
 sed -i "s/#VerbosePkgLists/VerbosePkgLists/" /etc/pacman.conf
 sed -i "/\#ParallelDownloads = 5/a ILoveCandy" /etc/pacman.conf
-#sed -i "s/^#ParallelDownloads = 5$/ParallelDownloads = 5/" /etc/pacman.conf
+sed -i "s/^#ParallelDownloads = 5$/ParallelDownloads = 5/" /etc/pacman.conf
 sed -i "/\[multilib\]/,/Include/"'s/^#//' /etc/pacman.conf
 
 pacman --noconfirm -Sy network-manager-applet dhcpcd wireless_tools wpa_supplicant intel-gpu-tools git dialog sed pactree wget

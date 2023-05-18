@@ -54,6 +54,8 @@ sleep 2
 
 # Setting Part2 :
 echo "grubdrive=$drive" > /mnt/arch_install2.sh
+echo "grubdrive=$drive"
+sleep 5
 sed -n '/^#Part2$/,/^#End2$/p' `basename $0` | sed 's/#Part2/# Arch install part 2/; /^#End2$/d' >> /mnt/arch_install2.sh
 chmod +x /mnt/arch_install2.sh
 
@@ -70,6 +72,9 @@ reboot
 # --------------------------------------------------------------------------------
 
 #Part2
+echo $timezone
+echo $drive
+sleep 10
 # Time :
 ln -sf /usr/share/zoneinfo/$timezone /etc/localtime
 hwclock --systohc
@@ -111,7 +116,7 @@ clear
 # Grub Install :
 echo "Installing Grub Bootloader"
 grub-install --target=i386-pc $grubdrive
-sleep 3
+sleep 5
 grub-mkconfig -o /boot/grub/grub.cfg
 clear
 

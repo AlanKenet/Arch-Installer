@@ -54,29 +54,29 @@ sleep 2
 
 # Setting Part2 :
 echo "grubdrive=$drive" > /mnt/arch_install2.sh
-echo "grubdrive=$drive"
-sleep 5
+echo "timezoneslt=$timezone" >> /mnt/arch_install2.sh
 sed -n '/^#Part2$/,/^#End2$/p' `basename $0` | sed 's/#Part2/# Arch install part 2/; /^#End2$/d' >> /mnt/arch_install2.sh
 chmod +x /mnt/arch_install2.sh
 
 # Setting Part3 :
-#sed -n '/^#Part3$/,/^#End3$/p' `basename $0` | sed 's/#Part3/# Arch install part 3/; /^#End3$/d' > /mnt/arch_install3.sh
-#chmod +x /mnt/arch_install3.sh
+sed -n '/^#Part3$/,/^#End3$/p' `basename $0` | sed 's/#Part3/# Arch install part 3/; /^#End3$/d' > /mnt/arch_install3.sh
+chmod +x /mnt/arch_install3.sh
+
 
 arch-chroot /mnt ./arch_install2.sh
-exit
 umount -R /mnt
-swapoff /dev/sda1
-shutdown now
+swapoff $swappart
+sleep 3
+#shutdown now
+#reboot
+shutdown -r now
 
 # --------------------------------------------------------------------------------
 
 #Part2
-echo $timezone
-echo $drive
-sleep 10
+
 # Time :
-ln -sf /usr/share/zoneinfo/$timezone /etc/localtime
+ln -sf /usr/share/zoneinfo/$timezoneslt /etc/localtime
 hwclock --systohc
 
 # Config :
@@ -99,12 +99,11 @@ printf "[+]→ Enter Username : "
 read username
 useradd -m $username
 sleep 2
-#usermod -l $fullname $username
-#sleep 2
+echo "[+]→ Creating ${username}'s password : "
 passwd $username
 usermod -aG wheel,audio,video,optical,storage,disk,network $username
 
-echo "[+]→ Creating root password : "
+echo "[+]→ Creating root's password : "
 passwd
 
 # Sudo :
@@ -147,4 +146,30 @@ systemctl enable bluetooth
 clear
 
 echo "System Installation Done"
+sleep 3
+exit
 #End2
+
+#Part3
+
+# Base :
+echo "Installing Main Packages"
+sudo pacman --noconfirm -Sy xorg-server xorg-xinit xorg-xkill xorg-xsetroot xorg-xprop polkit ffmpeg pipewire pipewire-audio pipewire-alsa pipewire-pulse alsa-utils pavucontrol noto-fonts sddm gvfs xdg-utils xdg-user-dirs blueman net-tools pciutils usbutils
+
+# login :
+echo "Enabling Services"
+sudo systemctl enable sddm
+echo "Installation Done"
+
+# yay Install :
+echo "Installing Yay"
+cd $HOME
+git clone https://aur.archlinux.org/yay-bin.git
+cd yay-bin
+makepkg -si
+
+# Cleaning :
+sudo rm -rf /arch_install2.sh
+echo "Installing Done"
+
+#End3

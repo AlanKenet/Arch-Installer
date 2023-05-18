@@ -67,7 +67,7 @@ arch-chroot /mnt ./arch_install2.sh
 exit
 umount -R /mnt
 swapoff /dev/sda1
-reboot
+shutdown now
 
 # --------------------------------------------------------------------------------
 

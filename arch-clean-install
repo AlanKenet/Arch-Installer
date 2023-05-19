@@ -128,12 +128,12 @@ sed -i "/\#ParallelDownloads = 5/a ILoveCandy" /etc/pacman.conf
 sed -i "s/^#ParallelDownloads = 5$/ParallelDownloads = 10/" /etc/pacman.conf
 sed -i "/\[multilib\]/,/Include/"'s/^#//' /etc/pacman.conf
 
-pacman --noconfirm -Sy network-manager-applet dhcpcd wireless_tools wpa_supplicant intel-gpu-tools git dialog sed pactree wget | grep -i -e "warning" -e "error"
+pacman --noconfirm -Syu network-manager-applet dhcpcd wireless_tools wpa_supplicant intel-gpu-tools git dialog sed pacman-contrib wget | grep -i -e "warning" -e "error"
 sleep 5
 
 # Gaming :
 echo "Installing System Graphics Driver"
-pacman --noconfirm -Sy mesa lib32-mesa vulkan-intel lib32-vulkan-intel vulkan-icd-loader lib32-vulkan-icd-loader lib32-ocl-icd intel-compute-runtime | grep -i -e "warning" -e "error"
+pacman --noconfirm -Syu mesa lib32-mesa vulkan-intel lib32-vulkan-intel vulkan-icd-loader lib32-vulkan-icd-loader lib32-ocl-icd intel-compute-runtime | grep -i -e "warning" -e "error"
 sleep 5
 
 echo "Installation Done"
@@ -154,7 +154,7 @@ exit
 
 # Base :
 echo "Installing Main Packages"
-sudo pacman --noconfirm -Sy xorg-server xorg-xinit xorg-xkill xorg-xsetroot xorg-xprop polkit ffmpeg pipewire pipewire-audio pipewire-alsa pipewire-pulse alsa-utils pavucontrol noto-fonts sddm gvfs xdg-utils xdg-user-dirs blueman net-tools pciutils usbutils git | grep -i -e "warning" -e "error"
+sudo pacman --noconfirm -Syu xorg-server xorg-xinit xorg-xkill xorg-xsetroot xorg-xprop polkit ffmpeg pipewire pipewire-audio pipewire-alsa pipewire-pulse alsa-utils pavucontrol noto-fonts sddm gvfs xdg-utils xdg-user-dirs blueman net-tools pciutils usbutils git | grep -i -e "warning" -e "error"
 sleep 5
 
 echo "Installation Done"
@@ -171,6 +171,6 @@ makepkg -si --noconfirm
 sudo rm -rf /arch_install2.sh
 echo "Installing Done"
 sleep 3
-sudo rm -f "$0"
+sudo rm -rf "$0"
 
 #End3

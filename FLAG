@@ -1,7 +1,8 @@
 REMOVE THIS WHEN THE SCRIPT RUNS CORRECTLY.
 
 to fix: 
-* Unmount in safemode
-* Configure root user and no-root user with sudo privileges
-* Split script in 2 parts (MAYBE)
+* Unmount in safemode (fixed)
+* Configure root user and no-root user with sudo privileges (fixed)
+* Split script in 2 parts (fixed)
 * Configure options to an installation in VMWare
+* Clean final users configuration

@@ -59,8 +59,8 @@ sed -n '/^#Part2$/,/^#End2$/p' `basename $0` | sed 's/#Part2/# Arch install part
 chmod +x /mnt/arch_install2.sh
 
 # Setting Part3 :
-sed -n '/^#Part3$/,/^#End3$/p' `basename $0` | sed 's/#Part3/# Arch install part 3/; /^#End3$/d' > /mnt/arch_install3.sh
-chmod +x /mnt/arch_install3.sh
+sed -n '/^#Part3$/,/^#End3$/p' `basename $0` | sed 's/#Part3/# Arch install part 3/; /^#End3$/d' > /mnt/continue.sh
+chmod +x /mnt/continue.sh
 
 
 arch-chroot /mnt ./arch_install2.sh

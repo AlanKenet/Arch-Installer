@@ -33,4 +33,4 @@ Changes:
 * Yay installation has been fixed.
 * Minor corrections to the pacman parameters.
 
-All credits go to Luca.py from https://gitlab.com/luca.py/arch-installer
+Credits go to Luca.py from https://gitlab.com/luca.py/arch-installer

@@ -168,13 +168,7 @@ makepkg -si --noconfirm
 
 # Cleaning :
 sudo rm -rf /arch_install2.sh
-
-kamikase() {
-  #rm "$0"
-  sudo rm -rf "$0"
-}
 echo "Installing Done"
 sleep 1
-trap kamikase EXIT
 
 #End3

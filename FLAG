@@ -5,4 +5,5 @@ to fix:
 * Configure root user and no-root user with sudo privileges (fixed)
 * Split script in 2 parts (fixed)
 * Configure options to an installation in VMWare
-* Clean final users configuration
+* Add an autocleaner
+* Add an autoconfigure for final users configuration

@@ -20,9 +20,9 @@ curl https://raw.githubusercontent.com/AlanKenet/Arch-Installer/main/arch-instal
 sh installer
 ```
 * Follow the steps inside the script
-* After reboot, execute the continue file with the sh command.
+* After reboot, execute the continue.sh file with the sh command.
 ```Bash
-sh continue
+sh continue.sh
 ```
 * Enjoy!
 * As an additional step, I recommend modifying or creating a new user with enhanced and secure sudo rules.

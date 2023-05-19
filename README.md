@@ -17,6 +17,7 @@ Instructions:
 * Follow the steps inside the script
 * After reboot, execute the continue file with the sh command.
 * Enjoy!
+* As an additional step, I recommend modifying or creating a new user with enhanced and secure sudo rules.
 
 Changes:
 

@@ -37,7 +37,7 @@ sh continue.sh
 * The wheel group privileges have been specified in the sudoers file.
 * Timezone selection has been modified.
 * Git package added before reboot system.
-* Sddi installation has been removed.
+* Sddm installation has been removed.
 * Yay installation has been fixed.
 * Minor corrections to the pacman parameters.
 

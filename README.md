@@ -13,9 +13,18 @@ Notes:
 Instructions:
 
 * From the Arch installation medium terminal, run curl to copy the arch-install file and save it as installer.
+```Bash
+curl https://raw.githubusercontent.com/AlanKenet/Arch-Installer/main/arch-install > installer
+```
 * Execute the installer file using the sh command.
+```Bash
+sh installer
+```
 * Follow the steps inside the script
 * After reboot, execute the continue file with the sh command.
+```Bash
+sh continue
+```
 * Enjoy!
 * As an additional step, I recommend modifying or creating a new user with enhanced and secure sudo rules.
 

@@ -2,15 +2,14 @@
 
 This is a modified version of the arch installation script created by luca.py for BIOS legacy systems.
 
-All original lines that have been altered are marked as "Removed" and the changes made are marked as "Added".
+## Notes:
 
-Notes:
-
+* All original lines that have been altered are marked as "Removed" and the changes made are marked as "Added".
 * Enter the timezone using the format Zone/Subzone. Example: "[+]→ Enter the Timezone with format Zone/SubZone : America/Chicago"
 * To avoid issues with GRUB installation, specify the full path to the drive in the "[+]→ Enter The Drive :" option. Example: "[+]→ Enter The Drive : /dev/sda".
 * FLAG file contain a "to fix" list.
 
-Instructions:
+## Instructions:
 
 * From the Arch installation medium terminal, run curl to copy the arch-install file and save it as installer.
 ```Bash
@@ -28,7 +27,7 @@ sh continue
 * Enjoy!
 * As an additional step, I recommend modifying or creating a new user with enhanced and secure sudo rules.
 
-Changes:
+## Changes:
 
 * The loadkeys for the French distribution has been removed, keeping the default distribution.
 * A select timezone option has been added.

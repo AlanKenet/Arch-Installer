@@ -1,10 +1,10 @@
 # Arch-Installer
 
-This is a Arch Installer for BIOS legacy systems, based in a modified version of the arch installation script created by luca.py.
+This is an Arch installer for legacy BIOS systems, based on a modified version of the Arch installation script created by luca.py.
 
 ## Notes:
 
-* My own version is named arch-installer, luca.py modified version are named xarch-installer.
+* My own version is named arch-install, luca.py modified version are named xarch-install.
 * All original lines that have been altered are marked as "Removed" and the changes made are marked as "Added".
 * Enter the timezone using the format Zone/Subzone. Example: "[+]→ Enter the Timezone with format Zone/SubZone : America/Chicago"
 * To avoid issues with GRUB installation, specify the full path to the drive in the "[+]→ Enter The Drive :" option. Example: "[+]→ Enter The Drive : /dev/sda".
